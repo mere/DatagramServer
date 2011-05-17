@@ -3,11 +3,8 @@ package com.mere.utils.datagramserver.infrastructure
 	import com.mere.utils.datagramserver.events.DataReceivedEvent;
 	
 	import flash.events.DatagramSocketDataEvent;
-	import flash.events.Event;
 	import flash.net.DatagramSocket;
 	import flash.utils.ByteArray;
-	
-	import mx.controls.Alert;
 	
 	import org.spicefactory.lib.logging.LogContext;
 	import org.spicefactory.lib.logging.Logger;
