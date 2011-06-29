@@ -1,7 +1,8 @@
 package com.mere.utils.datagramserver.application
 {
 	import com.mere.utils.datagramserver.domain.DatagramModel;
-	import com.mere.utils.datagramserver.infrastructure.UIDatagramServer;
+	import com.mere.utils.datagramserver.events.DatagramStatusEvent;
+	import com.mere.utils.datagramserver.infrastructure.DatagramServer;
 	
 	import flash.events.Event;
 	
@@ -10,7 +11,7 @@ package com.mere.utils.datagramserver.application
 	{
 		
 		[Inject]
-		public var socket:UIDatagramServer;
+		public var socket:DatagramServer;
 		
 		[Inject]
 		public var model:DatagramModel;
@@ -29,5 +30,13 @@ package com.mere.utils.datagramserver.application
 		{
 			socket.stop();
 		}
+		
+		[MessageHandler]
+		public function onStatusChanged(e:DatagramStatusEvent):void
+		{
+			model.status = e.status;
+		}
+		
+		
 	}
 }

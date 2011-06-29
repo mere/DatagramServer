@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<fx:Object xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:s="library://ns.adobe.com/flex/spark" 
+		   xmlns:mx="library://ns.adobe.com/flex/mx" 
+		   xmlns:application="com.mere.utils.datagramserver.application.*" 
+		   xmlns:domain="com.mere.utils.datagramserver.domain.*" 
+		   xmlns:infrastructure="com.mere.utils.datagramserver.infrastructure.*" 
+		  >
+	<fx:Declarations>
+		<!-- Presentation -->
+		
+		<!-- Application -->
+		<application:DatagramServerInitCommand />
+		<application:DatagramServerCommunicationCommand />
+		<!-- Domain -->
+		<domain:DatagramModel />
+		<!-- Infrastructure -->
+		<infrastructure:DatagramServer />
+	</fx:Declarations>
+	
+</fx:Object>
+

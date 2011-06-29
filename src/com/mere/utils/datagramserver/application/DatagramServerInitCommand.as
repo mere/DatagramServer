@@ -1,7 +1,7 @@
 package com.mere.utils.datagramserver.application
 {
 	import com.mere.utils.datagramserver.domain.DatagramModel;
-	import com.mere.utils.datagramserver.infrastructure.UIDatagramServer;
+	import com.mere.utils.datagramserver.infrastructure.DatagramServer;
 	
 	import flash.events.Event;
 	import flash.net.InterfaceAddress;
@@ -15,7 +15,7 @@ package com.mere.utils.datagramserver.application
 		public var model:DatagramModel;
 		
 		[Inject]
-		public var socket:UIDatagramServer;
+		public var socket:DatagramServer;
 		
 		[MessageDispatcher]
 		public var dispatcher:Function;
@@ -40,7 +40,6 @@ package com.mere.utils.datagramserver.application
 					if (iface.active && !model.host)
 						model.host = address.address;
 					model.hostsAvailable.addItem(address.address);
-					
 				}
 			}
 			

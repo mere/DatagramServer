@@ -1,6 +1,8 @@
 package com.mere.utils.datagramserver.infrastructure
 {
+	import com.mere.utils.datagramserver.domain.enum.DatagramStatusEnum;
 	import com.mere.utils.datagramserver.events.DataReceivedEvent;
+	import com.mere.utils.datagramserver.events.DatagramStatusEvent;
 	
 	import flash.events.DatagramSocketDataEvent;
 	import flash.net.DatagramSocket;
@@ -9,10 +11,10 @@ package com.mere.utils.datagramserver.infrastructure
 	import org.spicefactory.lib.logging.LogContext;
 	import org.spicefactory.lib.logging.Logger;
 	
-	public final class UIDatagramServer
+	public final class DatagramServer
 	{
-		private static const log : Logger = LogContext.getLogger(UIDatagramServer);
-
+		private static const log : Logger = LogContext.getLogger(DatagramServer);
+		
 		[MessageDispatcher]
 		public var dispatcher:Function;
 		
@@ -35,7 +37,7 @@ package com.mere.utils.datagramserver.infrastructure
 		 */ 
 		public function stop():void
 		{
-			log.info('[DatagramServer] closing connection.');
+			dispatcher(new DatagramStatusEvent(DatagramStatusEnum.DISCONNECTED, "[DatagramServer] closing connection."));
 			if (socket && socket.bound)
 				socket.close();
 			socket = null;
@@ -47,12 +49,12 @@ package com.mere.utils.datagramserver.infrastructure
 			{
 				socket = new DatagramSocket();
 				socket.addEventListener( DatagramSocketDataEvent.DATA, onData );
-				socket.bind(port);//localAddress);
-				log.info('[DatagramServer] listening on '+localAddress+':'+port);
+				socket.bind(port, localAddress);
+				dispatcher(new DatagramStatusEvent(DatagramStatusEnum.CONNECTED, '[DatagramServer] listening on '+localAddress+':'+port));
 			}
 			catch (error:Error)
 			{
-				log.error( "[DatagramServer] error:"+error);
+				dispatcher(new DatagramStatusEvent(DatagramStatusEnum.FAILED, "[DatagramServer] error:"+error));
 			}
 		}
 		
@@ -60,6 +62,7 @@ package com.mere.utils.datagramserver.infrastructure
 		{
 			var byteArray:ByteArray = ByteArray(e.data);
 			byteArray.uncompress();
+			log.info('[DatagramServer] Data received: '+byteArray);
 			dispatcher(new DataReceivedEvent(e.srcAddress,byteArray));
 		}
 	}
