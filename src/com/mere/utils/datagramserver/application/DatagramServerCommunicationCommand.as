@@ -19,12 +19,18 @@ package com.mere.utils.datagramserver.application
 		[MessageDispatcher]
 		public var dispatcher:Function;
 		
+		/**
+		 * 	Start listening
+		 */ 
 		[MessageHandler(selector="START_DATAGRAM_SERVER")]
 		public function start(e:Event):void
 		{
 			socket.start(int(model.port),model.host);
 		}
 		
+		/**
+		 * 	Stop listening
+		 */
 		[MessageHandler(selector="STOP_DATAGRAM_SERVER")]
 		public function stop(e:Event):void
 		{

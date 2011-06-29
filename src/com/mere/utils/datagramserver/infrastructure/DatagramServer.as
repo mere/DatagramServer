@@ -37,7 +37,7 @@ package com.mere.utils.datagramserver.infrastructure
 		 */ 
 		public function stop():void
 		{
-			dispatcher(new DatagramStatusEvent(DatagramStatusEnum.DISCONNECTED, "[DatagramServer] closing connection."));
+			dispatcher(new DatagramStatusEvent(DatagramStatusEnum.DISCONNECTED, "[DatagramServer] Connection closed."));
 			if (socket && socket.bound)
 				socket.close();
 			socket = null;
@@ -61,7 +61,15 @@ package com.mere.utils.datagramserver.infrastructure
 		private function onData(e: DatagramSocketDataEvent):void 
 		{
 			var byteArray:ByteArray = ByteArray(e.data);
-			byteArray.uncompress();
+			try
+			{
+				byteArray.uncompress();
+			}
+			catch(e:Error)
+			{
+				//the datagram packet wasn't compressed.
+			}
+			
 			log.info('[DatagramServer] Data received: '+byteArray);
 			dispatcher(new DataReceivedEvent(e.srcAddress,byteArray));
 		}
