@@ -35,4 +35,11 @@ public function dataReceived(e:DataReceivedEvent):void
 	* e.xml     : returns the packet as xml
 	*/
 }</pre></li>
+
+<h2>Demo</h2>
+<ul>
+	<li>
+	<a href="https://github.com/mere/DatagramServerExample" >https://github.com/mere/DatagramServerExample</a>
+	</li>
+</ul>
 </ol>
