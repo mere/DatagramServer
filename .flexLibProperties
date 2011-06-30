@@ -3,6 +3,7 @@
   <includeClasses>
     <classEntry path="com.mere.utils.datagramserver.domain.enum.DatagramStatusEnum"/>
     <classEntry path="com.mere.utils.datagramserver.domain.enum._StringEnum"/>
+    <classEntry path="com.mere.utils.datagramserver.events.DatagramServerEvent"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
